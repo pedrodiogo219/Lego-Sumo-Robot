@@ -9,7 +9,6 @@ class CLPButtons(Button):
 
     def press_for_quit(self, robot):
         if(self.any()):
-            print("entrou aqui")
             robot.reset()
             robot.ramp.stop(stop_action='coast')
             sys.exit(0)

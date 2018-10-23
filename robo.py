@@ -34,8 +34,8 @@ class Brabo(object):
         self.ramp.stop(stop_action=action)
     
     def rotate(self, speed):
-        self.me.run_forever(speed_sp =  speed, stop_action='brake')
-        self.md.run_forever(speed_sp = -speed, stop_action='brake')
+        self.me.run_forever(speed_sp =  -speed, stop_action='brake')
+        self.md.run_forever(speed_sp =   speed, stop_action='brake')
     
     def ramp_push(self):
         self.ramp.run_to_abs_pos(position_sp=-30, speed_sp=1000, stop_action='hold')
@@ -43,14 +43,11 @@ class Brabo(object):
         self.ramp.run_to_abs_pos(position_sp=  0, speed_sp= 300, stop_action='hold')
         sleep(0.5)
 
-    def sees_anything(self):
-        return (self.us.distance_centimeters <= float(20))
+    def sees_anything(self, dist):
+        return (self.us.distance_centimeters <= float(dist))
     
     def come_back(self):
-        self.me.run_to_abs_pos(position_sp = 0, speed_sp = 300)
-        self.md.run_to_abs_pos(position_sp = 0, speed_sp = 300)
+        self.me.run_to_abs_pos(position_sp = 0, speed_sp = 1000)
+        self.md.run_to_abs_pos(position_sp = 0, speed_sp = 1000)
         while self.me.state != ['holding']:
             pass
-    
-
-
